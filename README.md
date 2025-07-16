@@ -1,12 +1,10 @@
-Group Members and their GitHub Username
-
+Group Members and their GitHub Username:
 1.Manveer Singh (Manveer0121)
-
 2.Baburam Mallah
 3.Kabin Katuwal
 4.Pratik Aryal
 
-Role in Project 
+Role in Project: 
 1.Manveer Singh -> Makes the design pages and registration form
 2.Baburam Mallah -> Adds property and workspace forms
 3.Kabin Katuwal -> Builds the connects it to the database and backend
