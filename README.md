@@ -22,17 +22,17 @@ Roles in the Project:
 
 Communication & Collaboration:
 
-1.Communication:
+1. Communication:
 
  WhatsApp Group - We make a Whatsapp group as the primary communication tool for day-to-day collaboration.
  
  Microsoft Teams (MS Teams): we make this group meetings. These meetings are used to discuss progress, assign tasks for the upcoming week and identify issues
 
-2.Code Collaboration 
+2. Code Collaboration 
 
  GitHub Projects - we are using the Github project for code collaboartion 
 
-3Meeting Schedule:
+3. Meeting Schedule:
 
 Weekly Standup Meetings – Held every Thursday at 6:00 AM on Microsoft Teams.
 
