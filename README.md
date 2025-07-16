@@ -1,6 +1,6 @@
-Group Members and their GitHub Username          
-1.Manveer Singh (Manveer0121)
-2.Baburam Mallah
+##Group Members and their GitHub Username          
+##1.Manveer Singh (Manveer0121)
+##2.Baburam Mallah
 3.Kabin Katuwal
 4.Pratik Aryal
 
