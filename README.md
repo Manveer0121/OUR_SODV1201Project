@@ -18,8 +18,6 @@ Roles in the Project:
 
 4.Pratik Aryal – Implements the login system and search functionality.
 
-
-
 Communication & Collaboration:
 
 1. Communication:
