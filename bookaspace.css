@@ -1,0 +1,126 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #f4f4f4;
+  color: #333;
+}
+/*navbar*/
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #1f2937;
+  color: white;
+  padding: 15px 30px;
+}
+
+.navbar .logo {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.navbar nav {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.navbar a,
+.navbar.map-icon {
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.navbar  a:hover,
+.navbar .map-icon:hover {
+  text-decoration: underline;
+}
+
+.navbar .join-btn {
+  padding: 8px 16px;
+  border-radius: 5px;
+  background-color: skyblue;
+  color: white;
+  border: none;
+
+  cursor: pointer;
+}
+
+.navbar .join-btn:hover {
+  background-color: deepskyblue;
+}
+
+/* Form */
+.form-container {
+  max-width: 500px;
+  background: white;
+  padding: 30px;
+  margin: 40px auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-container h2 {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+form label {
+  display: block;
+  margin: 15px 0 5px;
+}
+
+form input,
+form select {
+  width: 100%;
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid gray;
+}
+
+form button {
+  margin-top: 20px;
+  width: 100%;
+  background-color: skyblue;
+  color: white;
+  border: none;
+  padding: 12px;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+form button:hover {
+  background-color: deepskyblue;
+}
+
+/* Footer */
+footer {
+  background-color: #333;
+  color: white;
+  padding: 2rem;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.footer-left {
+  text-align: left;
+}
+
+.footer-links a {
+  color: white;
+  text-decoration: none;
+  margin: 0 10px;
+}
+
+.footer-links a:hover {
+  text-decoration: underline;
+}
+
+.footer-bottom {
+  margin-top: 1rem;
+  font-size: 0.75rem;
+  color: #aaa;
+}
