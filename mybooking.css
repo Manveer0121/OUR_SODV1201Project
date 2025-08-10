@@ -1,0 +1,156 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #f4f4f4;
+  color: #333;
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #1f2937;
+  color: white;
+  padding: 15px 30px;
+}
+
+.navbar .logo {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.navbar nav {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.navbar a {
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.navbar a:hover,
+.navbar a.active {
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+.navbar .join-btn {
+  padding: 8px 16px;
+  border-radius: 5px;
+  background-color: skyblue;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.navbar .join-btn:hover {
+  background-color: deepskyblue;
+}
+
+/* Main */
+.booking-container {
+  max-width: 700px;
+  margin: 40px auto;
+  background: white;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.booking-container h2 {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+#bookingList {
+  margin-bottom: 20px;
+}
+
+.booking-item {
+  border: 1px solid #ddd;
+  padding: 15px 20px;
+  border-radius: 6px;
+  margin-bottom: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.booking-details {
+  max-width: 80%;
+}
+
+.booking-details p {
+  margin: 4px 0;
+}
+
+.delete-btn {
+  background-color: red;
+  border: none;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.delete-btn:hover {
+  background-color: red;
+}
+
+#clearAllBtn {
+  width: 100%;
+  padding: 12px;
+  background-color: red;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+#clearAllBtn:hover {
+  background-color: red;
+}
+
+/* Footer */
+.footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 0.9rem;
+  background-color: #333;
+  color: white;
+  padding: 2rem;
+}
+
+.footer-left,
+.footer-links {
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.footer-links a {
+  color: white;
+  margin: 0 0.5rem;
+  text-decoration: none;
+}
+
+.footer-links a:hover {
+  text-decoration: underline;
+}
+
+
+.footer-bottom {
+  margin-top: 1rem;
+  font-size: 0.75rem;
+  color: #aaa;
+}
