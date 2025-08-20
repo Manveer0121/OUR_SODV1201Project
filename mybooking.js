@@ -1,83 +1,60 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const bookingList = document.getElementById("bookingList");
-    const clearAllBtn = document.getElementById("clearAllBtn");
-    const userId = parseInt(localStorage.getItem('userId')) || 1;
+document.addEventListener('DOMContentLoaded', () => {
+  const userId = parseInt(localStorage.getItem('userId') || '0', 10);
+  if (!userId) {
+    window.location.href = 'login.html';
+    return;
+  }
 
-    function loadBookings() {
-      fetch(`http://localhost:3000/bookings?userId=${userId}`)
-        .then(response => response.json())
-        .then(data => {
-          const bookings = data.bookings || [];
-          bookingList.innerHTML = "";
+  const listEl = document.getElementById('bookingList');
 
-          if (bookings.length === 0) {
-            bookingList.innerHTML = "<p>You have no bookings yet.</p>";
-            clearAllBtn.style.display = "none";
-            return;
-          }
-
-          clearAllBtn.style.display = "block";
-
-          bookings.forEach((booking, index) => {
-            const div = document.createElement("div");
-            div.className = "booking-item";
-
-            const details = document.createElement("div");
-            details.className = "booking-details";
-            details.innerHTML = `
-              <p><strong>Workspace:</strong> ${booking.workspace.replace(/-/g, " ")}</p>
-              <p><strong>Date:</strong> ${booking.date}</p>
-              <p><strong>Time:</strong> ${booking.time}</p>
-              <p><strong>Duration:</strong> ${booking.duration} hour(s)</p>
-              <p><strong>Price:</strong> $${booking.price}</p>
-            `;
-
-            const delBtn = document.createElement("button");
-            delBtn.className = "delete-btn";
-            delBtn.textContent = "Delete";
-            delBtn.addEventListener("click", () => {
-              deleteBooking(booking.id);
-            });
-
-            div.appendChild(details);
-            div.appendChild(delBtn);
-            bookingList.appendChild(div);
-          });
-        })
-        .catch(error => console.error('Error:', error));
-    }
-
-    function deleteBooking(bookingId) {
-      fetch(`http://localhost:3000/bookings/${bookingId}`, {
-        method: 'DELETE'
-      })
-      .then(response => response.json())
-      .then(data => {
-        if (data.success) {
-          loadBookings();
-        } else {
-          alert(data.message);
-        }
-      })
-      .catch(error => console.error('Error:', error));
-    }
-
-    clearAllBtn.addEventListener("click", () => {
-      if (confirm("Are you sure you want to delete all bookings?")) {
-        fetch(`http://localhost:3000/bookings?userId=${userId}`, {
-          method: 'DELETE'
-        })
-        .then(response => response.json())
-        .then(data => {
-          if (data.success) {
-            loadBookings();
-          } else {
-            alert(data.message);
-          }
-        })
-        .catch(error => console.error('Error:', error));
-      }
+  async function loadBookings() {
+    try {
+      const token = localStorage.getItem('token');
+      const res = await fetch(`http://localhost:3000/bookings?userId=${userId}`, { headers: { 'Authorization': `Bearer ${token}` }
     });
+      const data = await res.json();
+      if (!data.success) return (listEl.textContent = 'Failed to load bookings.');
+      const items = data.bookings;
+      if (!items.length) {
+        listEl.innerHTML = '<p>No bookings yet.</p>';
+        return;
+      }
 
-    loadBookings();
+      listEl.innerHTML = items.map(b => {
+        const prop = b.property ? `${b.property.name}, ${b.property.city}` : 'Unknown property';
+        const ws   = b.workspace ? `${b.workspace.name} (${b.workspace.type})` : 'Unknown workspace';
+        return `
+          <div class="booking-card">
+            <h4>${prop}</h4>
+            <p>${ws}</p>
+            <p>Created: ${new Date(b.createdAt).toLocaleString()}</p>
+            <button data-id="${b.id}" class="delete-booking">Delete</button>
+          </div>
+        `;
+      }).join('');
+    } catch (e) {
+      console.error(e);
+      listEl.textContent = 'Network error while loading bookings.';
+    }
+  }
+
+  listEl?.addEventListener('click', async (e) => {
+    const btn = e.target.closest('.delete-booking');
+    if (!btn) return;
+    const id = btn.getAttribute('data-id');
+    if (!confirm('Delete this booking?')) return;
+    try {
+      const res = await fetch(`http://localhost:3000/bookings/${id}`, { method: 'DELETE' });
+      const data = await res.json();
+      if (data.success) loadBookings();
+      else alert(data.message || 'Delete failed.');
+    } catch (e2) {
+      console.error(e2);
+      alert('Network error.');
+    }
   });
+
+  loadBookings();
+});
+
+
