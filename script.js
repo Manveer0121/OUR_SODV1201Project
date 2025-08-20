@@ -1,23 +1,22 @@
-$(document).ready(function() {
-  const searchInput = $(".search-bar input");
-  const propertyCards = $(".property-card");
+document.addEventListener('DOMContentLoaded', () => {
+  const searchInput = document.querySelector('.search-bar input');
+  const cards = Array.from(document.querySelectorAll('.property-card'));
 
-  searchInput.on("input", function() {
-    const searchValue = searchInput.val().toLowerCase();
-    propertyCards.each(function() {
-      const card = $(this);
-      const title = card.find("h4").text().toLowerCase();
-      if (title.includes(searchValue)) {
-        card.css("display", "block");
-      } else {
-        card.css("display", "none");
-      }
+  if (searchInput) {
+    searchInput.addEventListener('input', (e) => {
+      const q = e.target.value.toLowerCase();
+      cards.forEach(card => {
+        const title = card.querySelector('h4')?.textContent.toLowerCase() || '';
+        card.style.display = title.includes(q) ? 'block' : 'none';
+      });
     });
-  });
-  const viewDetailsLinks = $(".property-card a");
-  viewDetailsLinks.on("click", function(event) {
-    event.preventDefault();
-    const propertyName = $(this).closest(".property-card").find("h4").text();
-    alert("Viewing details for: " + propertyName);
+  }
+
+  document.querySelectorAll('.property-card a').forEach(link => {
+    link.addEventListener('click', (ev) => {
+      ev.preventDefault();
+      const name = link.closest('.property-card')?.querySelector('h4')?.textContent || 'this property';
+      alert(`Viewing details for: ${name}`);
+    });
   });
 });
