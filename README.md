@@ -1,37 +1,136 @@
-Group Members and GitHub Usernames:
+# statuses
 
-1.Manveer Singh – Manveer0121
+[![NPM Version][npm-version-image]][npm-url]
+[![NPM Downloads][npm-downloads-image]][npm-url]
+[![Node.js Version][node-version-image]][node-version-url]
+[![Build Status][ci-image]][ci-url]
+[![Test Coverage][coveralls-image]][coveralls-url]
 
-2.Baburam Mallah – baburam537
+HTTP status utility for node.
 
-3.Kabin Katuwal – kabinkatuwal
+This module provides a list of status codes and messages sourced from
+a few different projects:
 
-4.Pratik Aryal – pratik2063
+  * The [IANA Status Code Registry](https://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml)
+  * The [Node.js project](https://nodejs.org/)
+  * The [NGINX project](https://www.nginx.com/)
+  * The [Apache HTTP Server project](https://httpd.apache.org/)
 
-Roles in the Project:
+## Installation
 
-1.Manveer Singh – Designs pages and creates the registration form.
+This is a [Node.js](https://nodejs.org/en/) module available through the
+[npm registry](https://www.npmjs.com/). Installation is done using the
+[`npm install` command](https://docs.npmjs.com/getting-started/installing-npm-packages-locally):
 
-2.Baburam Mallah – Builds the property and workspace submission forms.
+```sh
+$ npm install statuses
+```
 
-3.Kabin Katuwal – Connects the front end to the database and handles backend logic.
+## API
 
-4.Pratik Aryal – Implements the login system and search functionality.
+<!-- eslint-disable no-unused-vars -->
 
-Communication & Collaboration:
+```js
+var status = require('statuses')
+```
 
-1. Communication:
+### status(code)
 
- WhatsApp Group - We make a Whatsapp group as the primary communication tool for day-to-day collaboration.
- 
- Microsoft Teams (MS Teams): we make this group meetings. These meetings are used to discuss progress, assign tasks for the upcoming week and identify issues
+Returns the status message string for a known HTTP status code. The code
+may be a number or a string. An error is thrown for an unknown status code.
 
-2. Code Collaboration 
+<!-- eslint-disable no-undef -->
 
- GitHub Projects - we are using the Github project for code collaboartion 
+```js
+status(403) // => 'Forbidden'
+status('403') // => 'Forbidden'
+status(306) // throws
+```
 
-3. Meeting Schedule:
+### status(msg)
 
-Weekly Standup Meetings – Held every Thursday at 6:00 AM on Microsoft Teams.
+Returns the numeric status code for a known HTTP status message. The message
+is case-insensitive. An error is thrown for an unknown status message.
 
- 
+<!-- eslint-disable no-undef -->
+
+```js
+status('forbidden') // => 403
+status('Forbidden') // => 403
+status('foo') // throws
+```
+
+### status.codes
+
+Returns an array of all the status codes as `Integer`s.
+
+### status.code[msg]
+
+Returns the numeric status code for a known status message (in lower-case),
+otherwise `undefined`.
+
+<!-- eslint-disable no-undef, no-unused-expressions -->
+
+```js
+status['not found'] // => 404
+```
+
+### status.empty[code]
+
+Returns `true` if a status code expects an empty body.
+
+<!-- eslint-disable no-undef, no-unused-expressions -->
+
+```js
+status.empty[200] // => undefined
+status.empty[204] // => true
+status.empty[304] // => true
+```
+
+### status.message[code]
+
+Returns the string message for a known numeric status code, otherwise
+`undefined`. This object is the same format as the
+[Node.js http module `http.STATUS_CODES`](https://nodejs.org/dist/latest/docs/api/http.html#http_http_status_codes).
+
+<!-- eslint-disable no-undef, no-unused-expressions -->
+
+```js
+status.message[404] // => 'Not Found'
+```
+
+### status.redirect[code]
+
+Returns `true` if a status code is a valid redirect status.
+
+<!-- eslint-disable no-undef, no-unused-expressions -->
+
+```js
+status.redirect[200] // => undefined
+status.redirect[301] // => true
+```
+
+### status.retry[code]
+
+Returns `true` if you should retry the rest.
+
+<!-- eslint-disable no-undef, no-unused-expressions -->
+
+```js
+status.retry[501] // => undefined
+status.retry[503] // => true
+```
+
+## License
+
+[MIT](LICENSE)
+
+[ci-image]: https://badgen.net/github/checks/jshttp/statuses/master?label=ci
+[ci-url]: https://github.com/jshttp/statuses/actions?query=workflow%3Aci
+[coveralls-image]: https://badgen.net/coveralls/c/github/jshttp/statuses/master
+[coveralls-url]: https://coveralls.io/r/jshttp/statuses?branch=master
+[node-version-image]: https://badgen.net/npm/node/statuses
+[node-version-url]: https://nodejs.org/en/download
+[npm-downloads-image]: https://badgen.net/npm/dm/statuses
+[npm-url]: https://npmjs.org/package/statuses
+[npm-version-image]: https://badgen.net/npm/v/statuses
