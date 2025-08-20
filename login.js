@@ -1,81 +1,39 @@
-const loginForm = document.getElementById("loginForm");
-const usernameInput = document.getElementById("username");
-const passwordInput = document.getElementById("password");
-const message = document.getElementById("loginMessage");
-const togglePassword = document.getElementById("togglePassword");
+document.addEventListener('DOMContentLoaded', () => {
+  const form = document.getElementById('loginForm');
+  const emailEl = document.getElementById('email');
+  const passEl  = document.getElementById('password');
+  const msgEl   = document.getElementById('loginMessage');
 
+  const showMessage = (text, color = 'red') => {
+    if (msgEl) { msgEl.textContent = text; msgEl.style.color = color; }
+    else alert(text);
+  };
 
-togglePassword.addEventListener("click", () => {
-  const isPassword = passwordInput.type === "password";
-  passwordInput.type = isPassword ? "text" : "password";
-  
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const username = (emailEl?.value || '').trim().toLowerCase();
+    const password = passEl?.value || '';
 
-  togglePassword.classList.toggle("fa-eye-slash", isPassword);
-  togglePassword.classList.toggle("fa-eye", !isPassword);
-});
-
-
-loginForm.addEventListener("submit", async function (e) {
-  e.preventDefault();
-
-  const username = usernameInput.value.trim();
-  const password = passwordInput.value;
-
-  
-  if (!validateEmailSimple(username)) {
-    showMessage("Please enter a valid email address.", "red");
-    return;
-  }
-
-  
-  if (password.length === 0) {
-    showMessage("Please enter your password.", "red");
-    return;
-  }
-
-  try {
-    const response = await fetch('http://localhost:3000/api/login', {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ username, password })
-    });
-
-    const result = await response.json();
-
-    if (result.success) {
-      showMessage("Login successful! Redirecting...", "green");
-      loginForm.classList.add("success-shake");
-      setTimeout(() => {
-        window.location.href = "mybooking.html";
-      }, 1500);
-    } else {
-      
-      showMessage("Invalid credentials.", "red");
-      loginForm.classList.add("error-shake");
+    try {
+      const res = await fetch('http://localhost:3000/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password })
+      });
+      const data = await res.json();
+      if (data.success) {
+        localStorage.setItem('userId', String(data.user.id));
+        localStorage.setItem('role', data.user.role || '');
+        localStorage.setItem('token', data.token);
+        if (data.user.contact) localStorage.setItem('contact', data.user.contact);
+        showMessage('Login successful! Redirecting...', 'green');
+        setTimeout(() => window.location.href = 'mybooking.html', 600);
+      } else {
+        showMessage('Invalid email or password.');
+      }
+    } catch (err) {
+      console.error(err);
+      showMessage('Network error. Is the server running on http://localhost:3000 ?');
     }
-  } catch (err) {
-    console.error(err);
-    showMessage("An error occurred. Please try again.", "red");
-  }
-});
-
-// Simple email validation function
-function validateEmailSimple(email) {
-   if (!email.includes("@")) return false;
-  const parts = email.split("@");
-  if (parts.length !== 2) return false;
-  if (parts[0].trim() === "" || parts[1].trim() === "") return false;
-  if (!parts[1].includes(".")) return false;
-  return true;
-}
-
-// Show message below form
-function showMessage(text, color) {
-  message.textContent = text;
-  message.style.color = color;
-}
-
-// Remove shake animation classes after animation ends
-loginForm.addEventListener("animationend", () => {
-  loginForm.classList.remove("error-shake", "success-shake");
+  });
 });
