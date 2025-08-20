@@ -1,57 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <title>Register - BookaDesk</title>
-    <link rel="stylesheet" href="register.css">
-    <script src="register.js" defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book A Space - Register</title>
+  <link rel="stylesheet" href="register.css">
 </head>
-
 <body>
-    <header class="navbar">
-        <div class="logo">BookaDesk</div>
-        <nav>
-          <a href="index.html">Home</a>
-      <a href="register.html">Register</a>
+  <header>
+    <h1>Book A Space</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="register.html" class="active">Register</a>
       <a href="login.html">Login</a>
       <a href="bookaspace-coworker.html">Coworker</a>
-      <a href="bookaspace-owner.html" class="active">Owner</a>
+      <a href="bookaspace-owner.html">Owner</a>
       <a href="mybooking.html">My Booking</a>
-            <button class="join-btn" onclick="window.location.href='bookaspace.html'">Book Now</button>
-        </nav>
-    </header>
-      <main class="register-container">
-    <h2>Register</h2>
-    <form id="registerForm">
-      <input type="text" id="fullName" placeholder="Full Name" required />
-      <input type="tel" id="phone" placeholder="Phone Number" pattern="^\+?\d{10,15}$" title="Enter valid phone number" required />
-      <input type="email" id="email" placeholder="Email" required />
-      <select id="role" required>
-        <option value="" disabled selected>Select role</option>
-        <option value="owner">Owner</option>
-        <option value="coworker">Coworker</option>
-      </select>
-      <input type="password" id="password" placeholder="Password (min 8 chars, incl. letters, numbers, symbols)" required />
-      <input type="password" id="confirmPassword" placeholder="Confirm Password" required />
-      <button type="submit">Register</button>
-    </form>
-    <p id="registerMessage"></p>
-  </main>
-    <footer class="footer">
-        <div class="footer-left">
-            <strong>BookaDesk</strong>
-            <p>Where work meets convenience</p>
-        </div>
-        <div class="footer-links">
-            <a href="#">Desk</a>
-            <a href="#">Conference Room</a>
-            <a href="#">Office</a>
-            <a href="#">Contact Us</a>
-            <a href="#">Learn More</a>
-        </div>
-        <div class="footer-bottom">BookaSpace © 2025. All rights reserved.</div>
-    </footer>
-</body>
+    </nav>
+  </header>
 
+  <main>
+    <section class="register-form">
+      <h2>Create an Account</h2>
+      <form id="registerForm">
+        <input type="text" id="fullName" placeholder="Full Name" required>
+        <input type="email" id="email" placeholder="Email" required>
+        <input type="tel" id="phone" placeholder="Phone Number" required>
+        <select id="role" required>
+          <option value="coworker">Coworker</option>
+          <option value="owner">Owner</option>
+        </select>
+        <input type="password" id="password" placeholder="Password" required>
+        <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
+        <button type="submit">Register</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Book A Space</p>
+  </footer>
+
+  <script src="register.js"></script>
+</body>
 </html>
