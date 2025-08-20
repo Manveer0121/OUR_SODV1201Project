@@ -1,45 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>My Booking - BookaDesk</title>
-  <link rel="stylesheet" href="mybooking.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book A Space - My Bookings</title>
+  <link rel="stylesheet" href="mybooking.css">
 </head>
 <body>
-  <header class="navbar">
-    <div class="logo">BookaDesk</div>
+  <header>
+    <h1>Book A Space</h1>
     <nav>
       <a href="index.html">Home</a>
       <a href="register.html">Register</a>
-      <a href="Login.html">Login</a>
-      <a href="bookaspace.html">Book a Space</a>
-      <a href="mybooking.html">My Booking</a>
-      <button class="join-btn">Book Now</button>
+      <a href="login.html">Login</a>
+      <a href="bookaspace-coworker.html">Coworker</a>
+      <a href="bookaspace-owner.html">Owner</a>
+      <a href="mybooking.html" class="active">My Booking</a>
     </nav>
   </header>
 
-  <main class="booking-container">
-    <h2>My Bookings</h2>
-    <div id="bookingList">
-      <!--Bookings will be injected here -->
-    </div>
-    <button id="clearAllBtn">Clear All Bookings</button>
+  <main>
+    <section>
+      <h2>My Bookings</h2>
+      <div id="bookingList"></div>
+    </section>
   </main>
 
-  <footer class="footer">
-    <div class="footer-left">
-      <strong>BookaSpace</strong>
-      <p>Where work meets convenience</p>
-    </div>
-    <div class="footer-links">
-      <a href="#">Desk</a>
-      <a href="#">Conference Room</a>
-      <a href="#">Office</a>
-      <a href="#">Contact Us</a>
-      <a href="#">Learn More</a>
-    </div>
-    <div class="footer-bottom">BookaSpace © 2025. All rights reserved.</div>
+  <footer>
+    <p>&copy; 2025 Book A Space</p>
   </footer>
 
   <script src="mybooking.js"></script>
